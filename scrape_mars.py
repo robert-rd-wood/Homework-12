@@ -81,7 +81,7 @@ def scrape():
     browser.click_link_by_partial_text('FULL IMAGE')
 
     # Pause to ensure the browser has navigated before executing additional code
-    time.sleep(3)
+    time.sleep(1)
 
     # Assign html code to variable
     html = browser.html
@@ -89,11 +89,14 @@ def scrape():
     # Navigate to the more info page
     browser.click_link_by_partial_text('more info')
 
-    # Pause to ensure the browser has navigated before executing additional code
-    time.sleep(3)
+    # # Pause to ensure the browser has navigated before executing additional code
+    # time.sleep(3)
 
     # Assign html code to variable
     html = browser.html
+
+    # Close browser window
+    browser.quit()
 
     # Create BS object
     soup = BeautifulSoup(html, 'html.parser')
@@ -189,8 +192,8 @@ def scrape():
         # Navigate to URL
         browser.visit(url)
         
-        # Pause to ensure the browser has navigated before executing additional code
-        time.sleep(3)
+        # # Pause to ensure the browser has navigated before executing additional code
+        # time.sleep(3)
         
         # Assign html code to variable
         html = browser.html
@@ -198,8 +201,8 @@ def scrape():
         # Navigate to the target page
         browser.click_link_by_partial_text(name)
 
-        # Pause to ensure the browser has navigated before executing additional code
-        time.sleep(3)
+        # # Pause to ensure the browser has navigated before executing additional code
+        # time.sleep(3)
 
         # Assign html code to variable
         html = browser.html
@@ -225,7 +228,9 @@ def scrape():
         # Append dictionary to list
         hemisphere_image_urls.append(image_dict)
 
-
+    # Close browser window
+    browser.quit()
+    
     # ### ...return one Python dictionary containing all of the scraped data
 
     # Create dictionary containing all scraped data
