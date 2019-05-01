@@ -11,46 +11,73 @@
 
 
 <body>
-  <div class="container-fluid text-center">
-    <h1 class="jumbotron">Mission to Mars</h1>
-    <a href="scrape">Scrape New Data</a>
-    <h4>Latest Mars News</h4>
-    <h5>{{ first_article_title }}</h5>
-    <p>{{ first_article_teaser }}</p>
+  <div class="container pt-3">
+    <div class="jumbotron text-center">
+        <h1 style="font-size:50px;">Mission to Mars</h1>
+        <p class="lead">
+            <a class="btn btn-primary btn-md" href="scrape" role="button">Scrape New Data</a>
+        </p>
+    </div>
+  </div>
 
-    <div col-sm-8>
+  <div class="container pt-3 pb-3 rounded" style="background-color:#e9ecef">
+    <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Featured Mars Image</h4>
-                <img clas=card-img-bottom" src={{ featured_image_url }} alt="Featured Image" style="width:500px;">
+                    <h4>Latest Mars News</h4>
+                    <p></p>
+                    <p><b>{{ first_article_title }}</b><br/>
+                    {{ first_article_teaser }}</p>
             </div>
         </div>
     </div>
+  </div>
 
-    <div col-sm-4>
-        <div class="card">
-            <div class="card-body">
-                <h5>Current Weather on Mars</h5>
-                <p>{{ mars_weather }}</p>
+  <div class="container pt-3 mt-3 rounded" style="background-color:#e9ecef">
+    <div class="row">
+
+        <div class="col-sm-7">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Featured Mars Image</h4>
+                    <img class="card-img-bottom" src={{ featured_image_url }} alt="Featured Image">
+                </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <h5>Mars Facts</h5>
-                <div>{{ mars_table }}</div>
+
+        <div class="col-sm-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Current Weather on Mars</h5>
+                    <p>{{ mars_weather }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Mars Facts</h5>
+                    {{ mars_table|safe }}
+                </div>
             </div>
         </div>
+
     </div>
+  </div>
+
+  <div class="container pt-3 rounded" style="background-color:#e9ecef">
 
     <h3>Mars Hemispheres</h3>
-    {% for item in hemisphere_image_urls %}
-        <div class="card" style="width:50%">
-            <div class="card-body">
-                <img src={{ item.img_url }} alt="Hemisphere Photo">
-                <p>{{ item.title }}</p>
+    <hr>
+
+    <div class="card-deck" style="column-count:2">
+        {% for item in hemisphere_image_urls %}
+            <div class="card">
+                <div class="card-body">
+                    <img class="card-img-top" src={{ item.img_url }} alt="Hemisphere Photo" style="width:500px;">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 
   </div>
 

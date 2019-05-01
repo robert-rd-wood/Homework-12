@@ -24,7 +24,7 @@ def home():
     hemisphere_image_urls = scraped_data.get("hemisphere_image_urls")
 
     # Return template and data
-    return render_template("index.html", first_article_title=first_article_title, first_article_teaser=first_article_teaser, featured_image_url=featured_image_url, mars_weather=mars_weather, hemisphere_image_urls=hemisphere_image_urls)
+    return render_template("index.html", first_article_title=first_article_title, first_article_teaser=first_article_teaser, featured_image_url=featured_image_url, mars_weather=mars_weather, mars_table=mars_table, hemisphere_image_urls=hemisphere_image_urls)
 
 
 # Route that will trigger the scrape function

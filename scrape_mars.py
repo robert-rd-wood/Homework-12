@@ -70,7 +70,7 @@ def scrape():
     executable_path = {'executable_path': 'chromedriver.exe'}
 
     # Assign browser variable
-    browser = Browser('chrome', **executable_path, headless=False)
+    browser = Browser('chrome', **executable_path, headless=True)
 
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(url)
@@ -81,16 +81,13 @@ def scrape():
     browser.click_link_by_partial_text('FULL IMAGE')
 
     # Pause to ensure the browser has navigated before executing additional code
-    time.sleep(1)
+    time.sleep(2)
 
     # Assign html code to variable
     html = browser.html
 
     # Navigate to the more info page
     browser.click_link_by_partial_text('more info')
-
-    # # Pause to ensure the browser has navigated before executing additional code
-    # time.sleep(3)
 
     # Assign html code to variable
     html = browser.html
@@ -160,10 +157,6 @@ def scrape():
     # Create html code for table
     mars_table = mars_facts_df.to_html()
 
-    # Strip new lines
-    mars_table = mars_table.replace('\n', '')
-
-
     # ### 1e. Mars Hemispheres
     # 
     # Visit the USGS Astrogeology site here to obtain high resolution images for each of Mar's hemispheres.
@@ -176,7 +169,7 @@ def scrape():
     executable_path = {'executable_path': 'chromedriver.exe'}
 
     # Assign browser variable
-    browser = Browser('chrome', **executable_path, headless=False)
+    browser = Browser('chrome', **executable_path, headless=True)
 
     # Assign URL
     url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
@@ -191,38 +184,32 @@ def scrape():
         
         # Navigate to URL
         browser.visit(url)
-        
-        # # Pause to ensure the browser has navigated before executing additional code
-        # time.sleep(3)
-        
+
         # Assign html code to variable
         html = browser.html
 
         # Navigate to the target page
         browser.click_link_by_partial_text(name)
 
-        # # Pause to ensure the browser has navigated before executing additional code
-        # time.sleep(3)
-
         # Assign html code to variable
         html = browser.html
 
         # Create BS object
         soup = BeautifulSoup(html, 'html.parser')
-        
+
         # Assign the title text
         title = soup.find('h2', class_="title").text
 
-        # Find the two links for photos
-        list = soup.find_all('a', target="_blank")
-
-        # Assign the url for the full resolution photo using the href of the second link
-        image_url = list[1]['href']
+        # Assign partial URL using image source
+        partial_url = soup.find('img', class_="wide-image")['src']
+        
+        # Construct full image URL
+        img_url = "https://astrogeology.usgs.gov" + partial_url    
         
         # Define dictionary object
         image_dict = {
                     "title": title,
-                    "img_url": image_url
+                    "img_url": img_url
                     }
         
         # Append dictionary to list
@@ -230,7 +217,7 @@ def scrape():
 
     # Close browser window
     browser.quit()
-    
+
     # ### ...return one Python dictionary containing all of the scraped data
 
     # Create dictionary containing all scraped data
