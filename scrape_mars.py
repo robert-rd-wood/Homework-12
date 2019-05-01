@@ -157,6 +157,7 @@ def scrape():
     # Create html code for table
     mars_table = mars_facts_df.to_html()
 
+
     # ### 1e. Mars Hemispheres
     # 
     # Visit the USGS Astrogeology site here to obtain high resolution images for each of Mar's hemispheres.
@@ -217,6 +218,7 @@ def scrape():
 
     # Close browser window
     browser.quit()
+
 
     # ### ...return one Python dictionary containing all of the scraped data
 

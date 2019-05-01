@@ -11,7 +11,7 @@
 
 
 <body>
-
+  <!-- Container for title and Scrape button -->
   <div class="container pt-3">
     <div class="jumbotron text-center">
         <h1 style="font-size:50px;">Mission to Mars</h1>
@@ -21,6 +21,7 @@
     </div>
   </div>
 
+  <!-- Container for Latest News -->
   <div class="container pt-3 pb-3 rounded" style="background-color:#e9ecef">
     <div class="col-md-12">
         <div class="card">
@@ -34,8 +35,10 @@
     </div>
   </div>
 
+  <!-- Container for Featured Mars Image, Current Mars Weather, and Mars Facts -->
   <div class="container pb-3 mt-3 rounded" style="background-color:#e9ecef">
     <div class="row">
+        <!-- Column for Featured Mars Image -->
         <div class="col-md-7">
             <div class="card mt-3">
                 <div class="card-body">
@@ -44,13 +47,16 @@
                 </div>
             </div>
         </div>
+        <!-- Column for Current Mars Weather and Mars Facts -->
         <div class="col-md-5">
+            <!-- Card for Current Mars Weather -->
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">Current Weather on Mars</h5>
                     <p>{{ scraped_data.mars_weather }}</p>
                 </div>
             </div>
+            <!-- Card for Mars Facts -->
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">Mars Facts</h5>
@@ -61,10 +67,12 @@
     </div>
   </div>
 
+  <!-- Container for Mars Hemisphere images -->
   <div class="container mt-3 pt-3 rounded" style="background-color:#e9ecef">
     <h3 style="text-align:center;">Mars Hemispheres</h3>
     <hr>
     <div class="row">
+        <!-- Iterate through list of dictionaries, pull dictionary values for hemisphere image and title -->
         {% for item in scraped_data.hemisphere_image_urls %}
          <div class="col-md-6">
             <div class="card mb-3">
