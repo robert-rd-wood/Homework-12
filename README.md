@@ -4,6 +4,8 @@ Homework 12 - Mission to Mars
 **Description**  
 Web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page.  
 
+![alt text](screenshots/screenshot_desktop.png "HTML Screenshot")
+
 **Contents**
 * screenshots/  
   * screenshot_MongoDB.png
