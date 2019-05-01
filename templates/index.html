@@ -11,6 +11,7 @@
 
 
 <body>
+
   <div class="container pt-3">
     <div class="jumbotron text-center">
         <h1 style="font-size:50px;">Mission to Mars</h1>
@@ -21,64 +22,60 @@
   </div>
 
   <div class="container pt-3 pb-3 rounded" style="background-color:#e9ecef">
-    <div class="col-sm-12">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-body">
                     <h4>Latest Mars News</h4>
                     <p></p>
-                    <p><b>{{ first_article_title }}</b><br/>
-                    {{ first_article_teaser }}</p>
+                    <p><b>{{ scraped_data.first_article_title }}</b><br/>
+                    {{ scraped_data.first_article_teaser }}</p>
             </div>
         </div>
     </div>
   </div>
 
-  <div class="container pt-3 mt-3 rounded" style="background-color:#e9ecef">
+  <div class="container pb-3 mt-3 rounded" style="background-color:#e9ecef">
     <div class="row">
-
-        <div class="col-sm-7">
-            <div class="card">
+        <div class="col-md-7">
+            <div class="card mt-3">
                 <div class="card-body">
                     <h4 class="card-title">Featured Mars Image</h4>
-                    <img class="card-img-bottom" src={{ featured_image_url }} alt="Featured Image">
+                    <img class="card-img-bottom" src={{ scraped_data.featured_image_url }} alt="Featured Image">
                 </div>
             </div>
         </div>
-
-        <div class="col-sm-5">
-            <div class="card">
+        <div class="col-md-5">
+            <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">Current Weather on Mars</h5>
-                    <p>{{ mars_weather }}</p>
+                    <p>{{ scraped_data.mars_weather }}</p>
                 </div>
             </div>
-            <div class="card">
+            <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">Mars Facts</h5>
-                    {{ mars_table|safe }}
+                    {{ scraped_data.mars_table|safe }}
                 </div>
             </div>
         </div>
-
     </div>
   </div>
 
-  <div class="container pt-3 rounded" style="background-color:#e9ecef">
-
-    <h3>Mars Hemispheres</h3>
+  <div class="container mt-3 pt-3 rounded" style="background-color:#e9ecef">
+    <h3 style="text-align:center;">Mars Hemispheres</h3>
     <hr>
-
-    <div class="card-deck" style="column-count:2">
-        {% for item in hemisphere_image_urls %}
-            <div class="card">
+    <div class="row">
+        {% for item in scraped_data.hemisphere_image_urls %}
+         <div class="col-md-6">
+            <div class="card mb-3">
                 <div class="card-body">
-                    <img class="card-img-top" src={{ item.img_url }} alt="Hemisphere Photo" style="width:500px;">
-                    <h5 class="card-title">{{ item.title }}</h5>
+                    <img class="card-img-top" src={{ item.img_url }} alt="Hemisphere Photo">
+                    <h5 class="card-title" style="text-align:center;">{{ item.title }}</h5>
                 </div>
             </div>
+        </div>
         {% endfor %}
     </div>
-
   </div>
 
 </body>

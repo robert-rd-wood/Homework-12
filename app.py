@@ -15,16 +15,8 @@ def home():
     # Find one record of data from the mongo database
     scraped_data = mongo.db.collection.find_one()
 
-    # Assign all variables from returned dictionary
-    first_article_title = scraped_data.get("first_article_title")
-    first_article_teaser = scraped_data.get("first_article_teaser")
-    featured_image_url = scraped_data.get("featured_image_url")
-    mars_weather = scraped_data.get("mars_weather")
-    mars_table = scraped_data.get("mars_table")
-    hemisphere_image_urls = scraped_data.get("hemisphere_image_urls")
-
     # Return template and data
-    return render_template("index.html", first_article_title=first_article_title, first_article_teaser=first_article_teaser, featured_image_url=featured_image_url, mars_weather=mars_weather, mars_table=mars_table, hemisphere_image_urls=hemisphere_image_urls)
+    return render_template("index.html", scraped_data=scraped_data)
 
 
 # Route that will trigger the scrape function
