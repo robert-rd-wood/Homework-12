@@ -23,41 +23,30 @@ def scrape():
     # Scrape the NASA Mars News Site and collect the latest News Title and Paragraph Text.
     # Assign the text to variables that you can reference later.
 
+    # Assign path for chromedriver
+    executable_path = {'executable_path': 'chromedriver.exe'}
+
+    # Assign browser variable
+    browser = Browser('chrome', **executable_path, headless=True)
+
     # URL of page to be scraped
     nasa_url = 'https://mars.nasa.gov/news/'
 
-    # Retrieve page with the requests module
-    response = requests.get(nasa_url)
+    # Direct browser to URL
+    browser.visit(nasa_url)
 
-    # Create BeautifulSoup object; parse with 'html.parser'
-    soup = BeautifulSoup(response.text, 'html.parser')
+    # Assign html code to variable
+    html = browser.html
 
-    # results are returned as an iterable list
-    results = soup.find_all('div', class_="slide")
+    # Create BS object
+    soup = BeautifulSoup(html, 'html.parser')
 
-    # Declare empty lists to hold results
-    titles = []
-    teasers = []
+    # Store title and teaser values
+    first_article_title = soup.find('div', class_="content_title").text.strip()
+    first_article_teaser = soup.find('div', class_="article_teaser_body").text.strip()
 
-    # Loop through returned results
-    for result in results:
-        # Error handling
-        try:
-            # Identify and return article title, strip leading and trailing spaces
-            title = result.find('div', class_="content_title").text.strip()
-            # Append title to titles list
-            titles.append(title)
-            # Identify and return article text, strip leading and trailing spaces
-            teaser = result.find('div', class_="rollover_description_inner").text.strip()
-            # Append teaser to teasers list
-            teasers.append(teaser)
-
-        except AttributeError as e:
-            print(e)
-
-    # Store the title and teaser for the first article to variables
-    first_article_title = titles[0]
-    first_article_teaser = teasers[0]
+    # Close browser window
+    browser.quit()
 
 
     # ### 1b . JPL Mars Space Images - Featured Image
