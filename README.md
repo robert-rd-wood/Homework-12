@@ -1,5 +1,4 @@
-# Homework-12
-Homework 12 - Mission to Mars
+# Mission to Mars
 
 **Description**  
 Web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page.  
